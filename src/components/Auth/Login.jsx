@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
-
+import './LoginSignup.css'
+import SignUp from './SignUp';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();  // useNavigate hook to handle navigation
-
   const handleLogin = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
@@ -19,9 +19,11 @@ const Login = () => {
       // Handle error display or alerts here
     }
   };
-
+  const signUp = ()=>{
+    navigate('/signup')
+  }
   return (
-    <div>
+    <div className='form'>
       <h2>Login</h2>
       <input
         type="email"
@@ -36,6 +38,7 @@ const Login = () => {
         placeholder="Password"
       />
       <button onClick={handleLogin}>Login</button>
+      <span onClick={signUp}>Sign up</span>
     </div>
   );
 };

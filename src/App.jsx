@@ -5,6 +5,7 @@ import SignUp from './components/Auth/SignUp';
 import Dashboard from './components/Dashboard';
 import PrivateRoute from './PrivateRoute';
 import TaskBoard from './components/TaskBoard/TaskBoard';
+import './App.css'
 
 function App() {
   return (
@@ -13,15 +14,6 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/dashboard" element={<TaskBoard />} />
-
-        {/* <Route
-          path="/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        /> */}
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Router>

@@ -1,9 +1,9 @@
-// src/components/TaskBoard/TaskBoard.jsx
 import React, { useState, useEffect } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import TaskList from './TaskList';
 import TaskForm from '../TaskForm';
 import { db } from '../../firebase';
+import '../Components.css'
 import { collection, addDoc, onSnapshot, updateDoc, doc } from 'firebase/firestore';
 
 const TaskBoard = () => {
@@ -23,30 +23,33 @@ const TaskBoard = () => {
 
   const onDragEnd = async (result) => {
     const { destination, source, draggableId } = result;
+
     if (!destination) return;
     if (destination.droppableId === source.droppableId && destination.index === source.index) return;
 
     const task = tasks.find((task) => task.id === draggableId);
-    await updateDoc(doc(db, 'tasks', task.id), { status: destination.droppableId });
+    const taskRef = doc(db, 'tasks', task.id);
+
+    const updatedHistory = [
+      ...task.history,
+      { status: destination.droppableId, timestamp: new Date().toISOString() },
+    ];
+
+    await updateDoc(taskRef, {
+      status: destination.droppableId,
+      history: updatedHistory,
+    });
   };
 
   return (
     <div>
       <TaskForm addTask={addTask} />
       <DragDropContext onDragEnd={onDragEnd}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div>
-            <h2>To Do</h2>
-            <TaskList sectionId="todo" tasks={tasks.filter((task) => task.status === 'todo')} />
-          </div>
-          <div>
-            <h2>In Progress</h2>
-            <TaskList sectionId="inprogress" tasks={tasks.filter((task) => task.status === 'inprogress')} />
-          </div>
-          <div>
-            <h2>Completed</h2>
-            <TaskList sectionId="completed" tasks={tasks.filter((task) => task.status === 'completed')} />
-          </div>
+      <div className='heading'><p>Todo</p><p>In Progress</p><p>Completed</p></div>
+        <div style={{ display: 'flex',  justifyContent: 'space-between' }}>
+          <TaskList sectionId="todo" tasks={tasks.filter((task) => task.status === 'todo')} />
+          <TaskList sectionId="inprogress" tasks={tasks.filter((task) => task.status === 'inprogress')} />
+          <TaskList sectionId="completed" tasks={tasks.filter((task) => task.status === 'completed')} />
         </div>
       </DragDropContext>
     </div>

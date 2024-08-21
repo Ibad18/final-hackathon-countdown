@@ -1,0 +1,35 @@
+.form{
+    width: 250px;
+    height: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    background: #f339fa;
+    margin: auto;
+    padding: 30px 10px;
+    color: #fff;
+    border-radius: 5px;
+}
+.form input{
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.form button{
+    cursor: pointer;
+    color: #fff;
+    background: blue;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.form span{
+    margin: 0;
+    padding: 0;
+    color: blue;
+    cursor: pointer;
+}

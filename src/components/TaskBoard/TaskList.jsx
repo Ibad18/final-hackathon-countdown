@@ -11,7 +11,7 @@ const TaskList = ({ sectionId, tasks }) => {
           {...provided.droppableProps}
           ref={provided.innerRef}
           style={{
-            backgroundColor: '#f0f0f0',
+            backgroundColor: '#f339fa',
             padding: '16px',
             borderRadius: '4px',
             minHeight: '400px',

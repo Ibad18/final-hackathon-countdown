@@ -1,19 +1,29 @@
-// src/App.jsx
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import TaskBoard from './components/TaskBoard/TaskBoard';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './components/Auth/Login';
 import SignUp from './components/Auth/SignUp';
-import ProtectedRoute from './components/ProtectedRoute';
+import Dashboard from './components/Dashboard';
+import PrivateRoute from './PrivateRoute';
+import TaskBoard from './components/TaskBoard/TaskBoard';
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={SignUp} />
-        <ProtectedRoute path="/dashboard" component={TaskBoard} />
-      </Switch>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/dashboard" element={<TaskBoard />} />
+
+        {/* <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        /> */}
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
     </Router>
   );
 }

@@ -20,7 +20,7 @@ const TaskItem = ({ task, index }) => {
           }}
         >
           <h4>{task.title}</h4>
-          <p>{task.description}</p>
+          {/* <p>{task.description}</p> */}
         </div>
       )}
     </Draggable>

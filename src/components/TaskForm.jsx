@@ -29,12 +29,6 @@ const TaskForm = ({ addTask }) => {
         placeholder="Task Title"
         required
       />
-      <textarea
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        placeholder="Task Description"
-        required
-      />
       <button type="submit">Add Task</button>
     </form>
   );
